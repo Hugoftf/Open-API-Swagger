@@ -121,4 +121,34 @@ Metodo Atualizar:
 
 
 
+#### Configurando o Security Scherme
+
+
+Para começar, iremos remover as respostas genericas que o swagger ao escanear nossa API cria baseadas na nossa classe de GlobalExceções que podem ocorrer na API para todas as requisições. Iremos adicionar mais uma prorpriedade no application.yml:
+
+
+![imagem local](/imagem_readme/app_yamal_springdoc.png)
+
+
+Depois na classe OpenAPIConfiguration, iremos adicionar configurações adicionais atraves de anotações:
+
+
+
+![imagem local](imagem_readme/config/classe_OpenAPIConfiguration_configurando_security_do_swagger.png)
+
+
+Basicamente essas configurações vão fazer que nosso swagger irá se autenticar via token e passar informações pelo hearder.
+
+
+O retorno no nosso swagger:
+
+
+![imagem local](/imagem_readme/bowser/swagger/authorizations_com_via_token.png)
+
+
+E por fim pode se autenticar via token:
+
+
+![imagem local](/imagem_readme/bowser/swagger/authorizations_token_value.png)
+
 
