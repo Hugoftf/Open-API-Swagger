@@ -120,7 +120,7 @@ public class AuthorizationServerConfiguration {
                             .claim("email", authentication.getUsuario().getEmail());
                 }
             }
-        };''
+        };
     }
 
     @Bean
