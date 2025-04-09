@@ -7,12 +7,13 @@
   - [Tecnologias Usadas](#Tecnologias-Usadas)
   - [Sobre](#Sobre)
   - [Inicio](#Inicio)
+  - [Configurando e Documentando](#Documentando)
 
 
 ## Tecnologias Usadas
 
 [Java](https://www.java.com/pt-BR/) / [Spring](https://spring.io/projects/spring-boot) / [Docker](https://www.docker.com/) / [PostgresSQL](https://www.postgresql.org/) / [Pgadmin4](https://www.pgadmin.org/download/pgadmin-4-windows/) / [Thymeleaf](https://www.thymeleaf.org/) / [HTML5](https://pt.wikipedia.org/wiki/HTML5)
- / [Postman](https://www.postman.com/) / [Google Cloud](https://cloud.google.com/?hl=pt-BR) / [Swagger](https://swagger.io/)
+ / [Postman](https://www.postman.com/) / [Google Cloud](https://cloud.google.com/?hl=pt-BR) / [Swagger/OpenAPI](https://swagger.io/)
 
 
 ## Sobre
@@ -45,6 +46,78 @@ Feito isso, podemos acessar o swagger:
 Ainda assim para executar alguns funcionamentos precisamos se autenticar. Então os proximos passos iremos editar um pouco dessa interface do swagger e editar para os funcionamentos da página
 sejam autenticados automaticamente.
 
+
+
+## Documentando
+
+
+Para começar a configurar e documentar minha API, iremos criar uma classe no pacote confi chamada de OpenAPiConfiguration, ela irá simular a parte inicial da minha Documentação e também para configurações:
+
+
+![imagem local](/imagem_readme/config/classe_OpenAPIConfiguration.png)
+
+
+Ela carrega informações iniciais de contatos e titulos.
+
+
+Em seguida, na camada controller da nossa API de autores, iremos documenta-lá:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController.png)
+
+
+A começar pelo corpo da classe, recebendo a anotação @Tag que edita o titulo da aba da nossa API no Swagger. Depois documentando no metodo salvar:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController_metodo_salvar_swwager.png)
+
+
+Básicamete iremos descrever a funcionalidade do metodos e cada retorno possivel com codigos de http que nosso podem acontecer no nosso metodo. Com isso o retorno no swagger fica dessa forma:
+
+
+![imagem local](/imagem_readme/bowser/swagger/titulo_editado_e_contato.png)
+
+
+Esse é o titulo contendo as informações de contato, meu nome, web site, email, etc. Partindo para API de autor ficou dessa forma:
+
+
+![imagem local](/imagem_readme/bowser/swagger/aba_autor_metodo_salvar.png)
+
+
+Contendo mais informações editadas/documentadas mais abaixos.
+
+
+Agora iremos documentar todos os metodos incluindo o record AutorDTO. A começar pelo record AutorDTO:
+
+
+![imagem local](/imagem_readme/DTO/record_AutorDTO_classe_e_campos_documentados.png)
+
+
+Para os DTO's a anotação que usamos tanto para corpo do record quanto para campos é a @Scherma, sua utilidade principal é editar o nome do campo no swagger.
+
+
+Voltando para a camada controller o proximo metodo a ser editado é o obterDetalhes:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController_metodo_obterDetalhes_documentado.png)
+
+
+Agora o metodo deletar:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController_metodo_deletar_documentado.png)
+
+
+Metodo Pesquisar:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController_metodo_pesquisar_documentado.png)
+
+
+Metodo Atualizar:
+
+
+![imagem local](/imagem_readme/controller/AutorController/classe_AutorController_metodo_atualizar_documentado.png)
 
 
 
