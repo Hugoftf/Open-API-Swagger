@@ -8,6 +8,10 @@ import com.github.Hugoftf.Spring.JPA.exceptions.OperacaoNaoPermitida;
 import com.github.Hugoftf.Spring.JPA.exceptions.RegistroDuplicadoException;
 import com.github.Hugoftf.Spring.JPA.model.Autor;
 import com.github.Hugoftf.Spring.JPA.service.AutorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +28,7 @@ import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("autores")
+@Tag(name = "Autores")
 public class AutorController {
 
     public AutorService autorService;
@@ -37,6 +42,12 @@ public class AutorController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "Salvar", description = "Cadastrar novo autor")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201",description = "Cadastrado com sucesso"),
+            @ApiResponse(responseCode = "422",description = "Erro de validação"),
+            @ApiResponse(responseCode = "409",description = "autor já cadastrado")
+    })
     public ResponseEntity<Object> salvar(@RequestBody @Valid AutorDTO autorDTO){
 
         try {
@@ -59,6 +70,11 @@ public class AutorController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "Obter detalhes", description = "Obtém informações sobre algum autor")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",description = "Autor encontrado"),
+            @ApiResponse(responseCode = "404",description = "Autor não encontrado"),
+    })
     public ResponseEntity<AutorDTO> obterDetalhes(@PathVariable("id") String id){
         UUID idAutor = UUID.fromString(id);
 
@@ -71,6 +87,12 @@ public class AutorController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "Deletar", description = "Deletar no banco de dados algum autor")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204",description = "Deletado com sucesso"),
+            @ApiResponse(responseCode = "404",description = "Autor não encontrado"),
+            @ApiResponse(responseCode = "400",description = "Autor possui livro cadastrado"),
+    })
     public ResponseEntity<Object> deletarAutor(@PathVariable("id") String id){
        try {
            var idColetado = UUID.fromString(id);
@@ -91,6 +113,11 @@ public class AutorController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "Pesquisar", description = "Realiza pesquisa de autores com parametros")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",description = "A pesquisa foi um sucesso"),
+
+    })
     public ResponseEntity<List<AutorDTO>> encontrandoPorNomeOuNacionalidade(
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "nacionalidade", required = false) String nacionalidade
@@ -111,6 +138,12 @@ public class AutorController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "Atualizar", description = "Atualizar algum autor existe no banco de dados")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204",description = "Atualizado com sucesso"),
+            @ApiResponse(responseCode = "404",description = "Autor não encontrado"),
+            @ApiResponse(responseCode = "409",description = "Autor já cadastrado"),
+    })
     public ResponseEntity<Object> atualizandoAutor(@PathVariable("id") String id,
                                                    @RequestBody @Valid AutorDTO autorDTO){
 
