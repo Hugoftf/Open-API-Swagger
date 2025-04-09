@@ -1,4 +1,4 @@
-![imagem local](/imagem_readme/logo.png)
+![imagem local](/imagem_readme/logo.webp)
 
 
 
